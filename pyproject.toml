@@ -9,3 +9,47 @@ dependencies = [
     "django-environ>=0.13.0",
     "django-filter>=25.2",
 ]
+
+[tool.black]
+line_length = 90
+target-version = ["py312"]
+
+[tool.isort]
+profile = "black"
+
+[tool.ruff]
+line-length = 90
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "ANN", "RUF"]
+ignore = ["D100", "D101", "RUF001"]
+
+[tool.ruff.lint.per-file-ignores]
+"apps/config/settings/*.py" = ["F403", "F405"]
+"apps/**/migrations/*.py" = ["RUF012", "E501", "ANN201", "ANN001"]
+
+[tool.mypy]
+plugins = ["mypy_django_plugin.main"]
+ignore_missing_imports = false
+follow_imports = "normal"
+disable_error_code = ["import-untyped"]
+mypy_path = "apps"
+
+[tool.django-stubs]
+django_settings_module = "apps.config.settings.dev"
+strict_settings = true
+strict_model_abstract_attrs = true
+
+[[tool.mypy.overrides]]
+module = ["environ.*"]
+ignore_missing_imports = true
+
+[dependency-groups]
+dev = [
+    "black>=26.5.1",
+    "deptry>=0.25.1",
+    "django-stubs==5.1.3",
+    "mypy==1.11.0",
+    "ruff>=0.15.15",
+    "types-requests>=2.33.0.20260518",
+]
