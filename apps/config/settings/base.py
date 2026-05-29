@@ -1,14 +1,15 @@
 from pathlib import Path
 import environ
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 
+# env
 env = environ.Env()
-environ.Env.read_env(str(BASE_DIR / '.env'))
+environ.Env.read_env(BASE_DIR / ".env")
 
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = env("SECRET_KEY")
 
-AUTH_USER_MODEL = 'apps.user.User'
+# AUTH_USER_MODEL = 'user.User'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -17,12 +18,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.course',
-    'apps.pages',
-    'apps.progress',
-    'apps.user',
-    'apps.chat',
-    'apps.core',
+    'apps.user.apps.UserConfig',
+    'apps.course.apps.CourseConfig',
+    'apps.pages.apps.PagesConfig',
+    'apps.progress.apps.ProgressConfig',
+    'apps.chat.apps.ChatConfig',
+    'apps.core.apps.CoreConfig',
     'django_filters',
 ]
 
