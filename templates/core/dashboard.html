@@ -1,0 +1,365 @@
+{% load static %}
+<!doctype html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LearnAI — Dashboard</title>
+    <link rel="stylesheet" href="{% static 'core/css/dashboard.css' %}" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <a class="sidebar-logo" href="{% url 'landing' %}">
+        <div class="logo-mark">
+          <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
+            <path d="M9 2L3.5 5.5V12L9 16L14.5 12V5.5L9 2Z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+            <circle cx="9" cy="9" r="2" fill="white"/>
+          </svg>
+        </div>
+        <span class="logo-text">LearnAI</span>
+      </a>
+
+      <div class="nav-section">
+        <div class="nav-label">Asosiy</div>
+        <a class="nav-item active" href="{% url 'dashboard' %}">
+          <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 20 20">
+            <rect x="2" y="2" width="7" height="7" rx="1.5"/>
+            <rect x="11" y="2" width="7" height="7" rx="1.5"/>
+            <rect x="2" y="11" width="7" height="7" rx="1.5"/>
+            <rect x="11" y="11" width="7" height="7" rx="1.5"/>
+          </svg>
+          Dashboard
+        </a>
+        <a class="nav-item" href="#">
+          <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 20 20">
+            <path d="M4 4h12v10a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/>
+            <path d="M8 2h4v2H8z" stroke-linecap="round"/>
+            <path d="M8 9h4M8 12h2" stroke-linecap="round"/>
+          </svg>
+          Kurslarim
+          <span class="nav-badge">3</span>
+        </a>
+        <a class="nav-item" href="#">
+          <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 20 20">
+            <circle cx="10" cy="10" r="8"/>
+            <path d="M10 6v5l3 2" stroke-linecap="round"/>
+          </svg>
+          Jadval
+        </a>
+        <a class="nav-item" href="#">
+          <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 20 20">
+            <path d="M9 3L5 7H2v6h3l4 4V3z"/>
+            <path d="M15.07 4.93a8 8 0 010 10.14M12.24 7.76a4 4 0 010 4.48" stroke-linecap="round"/>
+          </svg>
+          AI Ustoz
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-label">O'rganish</div>
+        <a class="nav-item" href="#">
+          <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 20 20">
+            <path d="M3 5h14M3 10h10M3 15h7" stroke-linecap="round"/>
+          </svg>
+          Barcha kurslar
+        </a>
+        <a class="nav-item" href="#">
+          <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 20 20">
+            <path d="M9 12l2 2 4-4"/>
+            <path d="M5 7h10M5 10h6" stroke-linecap="round"/>
+            <rect x="2" y="3" width="16" height="14" rx="2"/>
+          </svg>
+          Testlar
+        </a>
+        <a class="nav-item" href="#">
+          <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 20 20">
+            <circle cx="10" cy="10" r="8"/>
+            <path d="M10 6v4l3 2" stroke-linecap="round"/>
+          </svg>
+          Sertifikatlar
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-label">Boshqa</div>
+        <a class="nav-item" href="#">
+          <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 20 20">
+            <circle cx="10" cy="8" r="3"/>
+            <path d="M4 18c0-3 2.7-5 6-5s6 2 6 5" stroke-linecap="round"/>
+          </svg>
+          Profil
+        </a>
+        <a class="nav-item" href="{% url 'logout' %}">
+          <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 20 20">
+            <path d="M13 15l3-3-3-3M16 12H8M10 4H5a1 1 0 00-1 1v10a1 1 0 001 1h5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Chiqish
+        </a>
+      </div>
+
+      <div class="sidebar-user">
+        <div class="user-avatar">{{ user.first_name|first|upper }}</div>
+        <div style="flex:1; min-width:0;">
+          <div class="user-name">{{ user.get_full_name }}</div>
+          <div class="user-plan">Pro plan</div>
+        </div>
+        <svg width="14" height="14" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1.8" viewBox="0 0 16 16">
+          <path d="M6 12l4-4-4-4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main">
+      <!-- TOPBAR -->
+      <div class="topbar">
+        <div class="topbar-left">
+          <p class="breadcrumb"><span>Dashboard</span></p>
+        </div>
+        <div class="topbar-right">
+          <div class="search-bar">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 16 16">
+              <circle cx="7" cy="7" r="5"/>
+              <path d="M11 11l3 3" stroke-linecap="round"/>
+            </svg>
+            Kurs qidirish...
+          </div>
+          <div class="notif-btn">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 20 20">
+              <path d="M10 2a6 6 0 016 6v3l2 3H2l2-3V8a6 6 0 016-6z"/>
+              <path d="M8 17a2 2 0 004 0" stroke-linecap="round"/>
+            </svg>
+            <div class="notif-dot"></div>
+          </div>
+          <div class="user-avatar" style="width:34px;height:34px;font-size:13px;cursor:pointer;">
+            {{ user.first_name|first|upper }}
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTENT -->
+      <div class="content">
+        <!-- GREETING -->
+        <div class="fade-up" style="margin-bottom:28px;">
+          <h1 style="font-size:26px; font-weight:650; letter-spacing:-.7px; color:var(--ink); margin-bottom:4px;">
+            Xush kelibsiz, {{ user.first_name }}! 👋
+          </h1>
+          <p style="font-size:14px; color:var(--ink3); font-weight:350;">
+            Bugun ham o'rganishni davom ettiramizmi? Streak — 7 kun 🔥
+          </p>
+        </div>
+
+        <!-- STATS ROW -->
+        <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:24px;">
+          <div class="stat-card fade-up d1">
+            <div class="stat-icon" style="background:#ede9fe;">🔥</div>
+            <div class="stat-num">7</div>
+            <div class="stat-lbl">Kun streak</div>
+            <div class="stat-change stat-up">↑ Rekord!</div>
+          </div>
+          <div class="stat-card fade-up d2">
+            <div class="stat-icon" style="background:#ecfdf5;">⚡</div>
+            <div class="stat-num">1,240</div>
+            <div class="stat-lbl">XP ball</div>
+            <div class="stat-change stat-up">↑ +120 bugun</div>
+          </div>
+          <div class="stat-card fade-up d3">
+            <div class="stat-icon" style="background:#eff6ff;">📚</div>
+            <div class="stat-num">3</div>
+            <div class="stat-lbl">Faol kurs</div>
+            <div class="stat-change" style="color:var(--ink3);">15 dars tugallandi</div>
+          </div>
+          <div class="stat-card fade-up d4">
+            <div class="stat-icon" style="background:#fff7ed;">🏆</div>
+            <div class="stat-num">2</div>
+            <div class="stat-lbl">Sertifikat</div>
+            <div class="stat-change stat-up">↑ 1 ta yangi</div>
+          </div>
+        </div>
+
+        <!-- MAIN GRID -->
+        <div style="display:grid; grid-template-columns:1fr 1fr 340px; gap:16px; margin-bottom:16px;">
+
+          <!-- Active courses -->
+          <div class="card fade-up d2" style="grid-column:span 2;">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;">
+              <div>
+                <div class="section-title" style="margin-bottom:2px;">Faol kurslar</div>
+                <p class="section-sub">Qolgan yerdan davom eting</p>
+              </div>
+              <a href="#" class="btn btn-ghost">Hammasi →</a>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:6px;">
+              <div class="course-item">
+                <div class="course-thumb-sm" style="background:#ede9fe;">🐍</div>
+                <div style="flex:1; min-width:0;">
+                  <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;">
+                    <p style="font-size:14px; font-weight:550; color:var(--ink);">Python dasturlash</p>
+                    <span style="font-size:12px; color:var(--p); font-weight:600;">68%</span>
+                  </div>
+                  <div class="progress-bar" style="margin-bottom:5px;"><div class="progress-fill" style="width:68%;"></div></div>
+                  <p style="font-size:12px; color:var(--ink3);">8-dars · Funksiyalar · 32 darsdan 22 ta qoldi</p>
+                </div>
+                <a href="#" class="btn btn-primary" style="flex-shrink:0;">Davom →</a>
+              </div>
+              <div class="course-item">
+                <div class="course-thumb-sm" style="background:#f3e8ff;">🤖</div>
+                <div style="flex:1; min-width:0;">
+                  <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;">
+                    <p style="font-size:14px; font-weight:550; color:var(--ink);">AI va Machine Learning</p>
+                    <span style="font-size:12px; color:var(--p); font-weight:600;">24%</span>
+                  </div>
+                  <div class="progress-bar" style="margin-bottom:5px;"><div class="progress-fill" style="width:24%;"></div></div>
+                  <p style="font-size:12px; color:var(--ink3);">3-dars · ML asoslari · 48 darsdan 37 ta qoldi</p>
+                </div>
+                <a href="#" class="btn btn-primary" style="flex-shrink:0;">Davom →</a>
+              </div>
+              <div class="course-item">
+                <div class="course-thumb-sm" style="background:#ecfdf5;">🌐</div>
+                <div style="flex:1; min-width:0;">
+                  <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;">
+                    <p style="font-size:14px; font-weight:550; color:var(--ink);">Web Development</p>
+                    <span style="font-size:12px; color:var(--p); font-weight:600;">91%</span>
+                  </div>
+                  <div class="progress-bar" style="margin-bottom:5px;"><div class="progress-fill" style="width:91%;"></div></div>
+                  <p style="font-size:12px; color:var(--ink3);">26-dars · JavaScript · 28 darsdan 3 ta qoldi</p>
+                </div>
+                <a href="#" class="btn btn-primary" style="flex-shrink:0;">Davom →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI Chat widget -->
+          <div class="card fade-up d3">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px; padding-bottom:14px; border-bottom:1px solid var(--border);">
+              <div style="width:34px;height:34px;border-radius:10px;background:var(--p);display:flex;align-items:center;justify-content:center;">
+                <svg width="16" height="16" fill="none" stroke="white" stroke-width="1.5" viewBox="0 0 18 18">
+                  <path d="M9 2L3.5 5.5V12L9 16L14.5 12V5.5L9 2Z" stroke-linejoin="round"/>
+                  <circle cx="9" cy="9" r="2" fill="white" stroke="none"/>
+                </svg>
+              </div>
+              <div>
+                <p style="font-size:13px; font-weight:600; color:var(--ink);">AI Ustoz</p>
+                <p style="font-size:11px; color:#059669; display:flex; align-items:center; gap:4px;">
+                  <span style="width:5px;height:5px;background:#059669;border-radius:50%;display:inline-block;"></span>Onlayn
+                </p>
+              </div>
+            </div>
+            <div class="ai-chat-widget">
+              <div class="chat-messages" id="chat-msgs">
+                <div class="chat-msg msg-ai">
+                  Salom {{ user.first_name }}! Bugun qaysi mavzuni o'rganamiz? 😊
+                </div>
+              </div>
+              <div class="chat-input-bar">
+                <input class="chat-input" id="chat-in" placeholder="Savol yozing..." onkeydown="if(event.key==='Enter')sendMsg()"/>
+                <button class="chat-send" onclick="sendMsg()">
+                  <svg width="14" height="14" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" viewBox="0 0 14 14">
+                    <path d="M2 12L12 7 2 2v4l7 1-7 1v4z"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOTTOM GRID -->
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px;">
+
+          <!-- Weekly activity -->
+          <div class="card fade-up d3">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;">
+              <div>
+                <div class="section-title" style="margin-bottom:2px;">Haftalik faollik</div>
+                <p class="section-sub">Daqiqa hisobida</p>
+              </div>
+              <span style="font-size:13px; font-weight:600; color:var(--p);">245 min</span>
+            </div>
+            <div class="chart-bar-wrap">
+              <div class="chart-bar" style="height:45%" data-val="28 min"></div>
+              <div class="chart-bar" style="height:70%" data-val="42 min"></div>
+              <div class="chart-bar" style="height:35%" data-val="22 min"></div>
+              <div class="chart-bar" style="height:85%" data-val="52 min"></div>
+              <div class="chart-bar" style="height:55%" data-val="33 min"></div>
+              <div class="chart-bar today" style="height:100%" data-val="68 min (bugun)"></div>
+              <div class="chart-bar" style="height:0;opacity:.3"></div>
+            </div>
+            <div style="display:flex; justify-content:space-between; margin-top:8px; padding:0 3px;">
+              <span style="font-size:10px;color:var(--ink3);">Dush</span>
+              <span style="font-size:10px;color:var(--ink3);">Sesh</span>
+              <span style="font-size:10px;color:var(--ink3);">Chor</span>
+              <span style="font-size:10px;color:var(--ink3);">Pay</span>
+              <span style="font-size:10px;color:var(--ink3);">Jum</span>
+              <span style="font-size:10px;color:var(--p);font-weight:600;">Sha</span>
+              <span style="font-size:10px;color:var(--ink3);">Yak</span>
+            </div>
+          </div>
+
+          <!-- Streak & badges -->
+          <div class="card fade-up d4">
+            <div class="section-title" style="margin-bottom:4px;">Streak va yutuqlar</div>
+            <p class="section-sub" style="margin-bottom:16px;">Bu hafta</p>
+            <div style="display:flex; align-items:center; gap:10px; background:var(--p-light); border-radius:12px; padding:12px 14px; margin-bottom:16px; border:1px solid var(--p-mid);">
+              <span style="font-size:28px; line-height:1;">🔥</span>
+              <div>
+                <p style="font-size:20px; font-weight:700; color:var(--ink); letter-spacing:-1px; line-height:1;">7 kun</p>
+                <p style="font-size:12px; color:var(--p); font-weight:550;">Rekord! Davom eting</p>
+              </div>
+            </div>
+            <div class="streak-days" style="margin-bottom:18px;">
+              <div style="text-align:center;"><div class="streak-day streak-done">D</div><p style="font-size:9px;color:var(--ink3);margin-top:3px;">Dush</p></div>
+              <div style="text-align:center;"><div class="streak-day streak-done">S</div><p style="font-size:9px;color:var(--ink3);margin-top:3px;">Sesh</p></div>
+              <div style="text-align:center;"><div class="streak-day streak-done">C</div><p style="font-size:9px;color:var(--ink3);margin-top:3px;">Chor</p></div>
+              <div style="text-align:center;"><div class="streak-day streak-done">P</div><p style="font-size:9px;color:var(--ink3);margin-top:3px;">Pay</p></div>
+              <div style="text-align:center;"><div class="streak-day streak-done">J</div><p style="font-size:9px;color:var(--ink3);margin-top:3px;">Jum</p></div>
+              <div style="text-align:center;"><div class="streak-day streak-today">S</div><p style="font-size:9px;color:var(--p);margin-top:3px;font-weight:600;">Bugun</p></div>
+              <div style="text-align:center;"><div class="streak-day streak-empty">Y</div><p style="font-size:9px;color:var(--ink3);margin-top:3px;">Yak</p></div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <div class="badge-item">
+                <div class="badge-icon" style="background:#ecfdf5;">🏆</div>
+                <div>
+                  <p style="font-size:13px;font-weight:550;color:var(--ink);">Web Master</p>
+                  <p style="font-size:11px;color:var(--ink3);">Web kursi 90% tugallandi</p>
+                </div>
+              </div>
+              <div class="badge-item badge-locked">
+                <div class="badge-icon" style="background:var(--surface);">🔒</div>
+                <div>
+                  <p style="font-size:13px;font-weight:550;color:var(--ink);">Python Pro</p>
+                  <p style="font-size:11px;color:var(--ink3);">Python kursini tugalling</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recommended -->
+          <div class="card fade-up d5" style="padding:0; overflow:hidden;">
+            <div style="padding:20px 20px 14px;">
+              <div class="section-title" style="margin-bottom:2px;">Tavsiya etilgan</div>
+              <p class="section-sub">Sizga mos yangi kurs</p>
+            </div>
+            <div class="rec-card" style="margin:0 12px 12px; border:none; box-shadow:none; background:var(--surface);">
+              <div class="rec-thumb" style="background:linear-gradient(135deg,#fdf4ff,#f3e8ff);">📊</div>
+              <div style="padding:14px;">
+                <div style="display:inline-block; font-size:11px; font-weight:600; background:var(--p-light); color:var(--p); padding:3px 10px; border-radius:20px; margin-bottom:8px;">Yangi</div>
+                <p style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px;">Data Science</p>
+                <p style="font-size:12px;color:var(--ink3);margin-bottom:14px;line-height:1.5;">Python bilimingizni ma'lumotlar tahlilida ishlating.</p>
+                <a href="#" class="btn btn-primary" style="width:100%;justify-content:center;">Kursni ko'rish →</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="{% static 'core/js/dashboard.js' %}"></script>
+  </body>
+</html>
