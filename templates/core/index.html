@@ -1,0 +1,499 @@
+<!doctype html>
+{% load static %}
+<html lang="uz">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>LearnAI — AI bilan o'rgan</title>
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+    />
+</head>
+<body>
+<!-- NAV -->
+<nav>
+    <div class="nav-inner">
+        <a class="logo" href="{% url 'landing' %}">
+            <div class="logo-mark">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path d="M9 2L3.5 5.5V12L9 16L14.5 12V5.5L9 2Z" stroke="white" stroke-width="1.5"
+                          stroke-linejoin="round"/>
+                    <circle cx="9" cy="9" r="2" fill="white"/>
+                </svg>
+            </div>
+            <span class="logo-text">LearnAI</span>
+        </a>
+        <div class="nav-links">
+            <a href="#features">Imkoniyatlar</a>
+            <a href="#kurslar">Kurslar</a>
+            <a href="#ustoz">AI Ustoz</a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'dashboard' %}">Dashboard</a>
+            {% endif %}
+            <a href="#narx">Narx</a>
+        </div>
+        <div class="nav-cta">
+            {% if user.is_authenticated %}
+            <a href="{% url 'dashboard' %}" class="btn btn-ghost btn-sm">Dashboard</a>
+            <form method="POST" action="{% url 'logout' %}" style="margin:0;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary btn-sm">
+                    Chiqish
+                </button>
+            </form>
+            {% else %}
+            <a href="{% url 'login' %}" class="btn btn-ghost btn-sm">Kirish</a>
+            <a href="{% url 'register' %}" class="btn btn-primary btn-sm">Boshlash
+                <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                     stroke-linejoin="round" viewBox="0 0 12 12">
+                    <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8"/>
+                </svg>
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-bg-blob blob1"></div>
+    <div class="hero-bg-blob blob2"></div>
+    <div class="hero-inner">
+        <div>
+            <div class="hero-eyebrow fade-up">
+                <div class="hero-eyebrow-dot">
+                    <svg width="10" height="10" fill="none" stroke="white" stroke-width="2" viewBox="0 0 12 12">
+                        <path d="M6 1v5l3 2"/>
+                        <circle cx="6" cy="6" r="5"/>
+                    </svg>
+                </div>
+                O'zbekistondagi birinchi AI ta'lim platformasi
+            </div>
+            <h1 class="hero-h1 fade-up d1">
+                O'rganish <em>hech qachon</em> bu qadar <br/>oson bo'lmagan
+            </h1>
+            <p class="hero-sub fade-up d2">
+                Har bir o'quvchiga shaxsiy AI ustoz. Savol berishdan uyalmang — AI tushuntiradi, sinaydi, motivatsiya
+                beradi.
+            </p>
+            <div class="hero-actions fade-up d3">
+                <a href="{% url 'register' %}" class="btn btn-primary">Bepul boshlash
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"
+                         stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 14 14">
+                        <path d="M3 11L11 3M11 3H5.5M11 3V8.5"/>
+                    </svg>
+                </a>
+                <a href="#ustoz" class="btn btn-ghost">AI Ustoz ko'rish</a>
+            </div>
+            <div class="hero-social-proof fade-up d4">
+                <div class="avatars">
+                    <span style="background:#7c3aed">A</span>
+                    <span style="background:#059669">B</span>
+                    <span style="background:#dc2626">C</span>
+                    <span style="background:#d97706">D</span>
+                    <span style="background:#2563eb">E</span>
+                </div>
+                <p style="font-size:13px; color:var(--ink3)">
+                    <span style="font-weight:600; color:var(--ink)">1,200+</span> o'quvchi allaqachon boshlagan
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MARQUEE -->
+<div style="background:#fff; border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:0;">
+    <div class="marquee-wrap">
+        <div class="marquee-track">
+            <div class="marquee-item">🐍 Python dasturlash</div>
+            <div class="marquee-item">🤖 Machine Learning</div>
+            <div class="marquee-item">🌐 Web Development</div>
+            <div class="marquee-item">📊 Data Science</div>
+            <div class="marquee-item">🎨 UI/UX Design</div>
+            <div class="marquee-item">⚡ JavaScript</div>
+            <div class="marquee-item">🔐 Cybersecurity</div>
+            <div class="marquee-item">☁️ Cloud Computing</div>
+            <div class="marquee-item">🐍 Python dasturlash</div>
+            <div class="marquee-item">🤖 Machine Learning</div>
+            <div class="marquee-item">🌐 Web Development</div>
+            <div class="marquee-item">📊 Data Science</div>
+            <div class="marquee-item">🎨 UI/UX Design</div>
+            <div class="marquee-item">⚡ JavaScript</div>
+            <div class="marquee-item">🔐 Cybersecurity</div>
+            <div class="marquee-item">☁️ Cloud Computing</div>
+        </div>
+    </div>
+</div>
+
+<!-- FEATURES BENTO -->
+<section id="features" style="padding:96px 0;">
+    <div class="section-wrap">
+        <div class="section-header">
+            <div class="eyebrow">✦ Imkoniyatlar</div>
+            <h2 class="h2">Boshqa platformalardan <em>farqi</em></h2>
+            <p class="sub">LearnAI — shunchaki video kurs emas. Bu sizning shaxsiy ta'lim assitentingiz.</p>
+        </div>
+        <div class="bento-grid">
+            <div class="bento-card span2">
+                <div class="bento-icon" style="background:var(--p-light);">🤖</div>
+                <h3 style="font-size:20px; font-weight:600; letter-spacing:-.5px; margin-bottom:8px;">AI Ustoz —
+                    24/7</h3>
+                <p style="color:var(--ink3); font-size:14px; line-height:1.7; max-width:460px;">Tushunmagan mavzuni
+                    darhol so'rang. AI har bir kurs bo'yicha chuqur bilimga ega — oddiy chatbot emas, haqiqiy
+                    murabbiy.</p>
+                <div style="margin-top:20px; display:flex; gap:8px; flex-wrap:wrap;">
+                    <span style="font-size:12px; background:var(--p-light); color:var(--p); padding:4px 12px; border-radius:20px; font-weight:550;">Cheksiz savollar</span>
+                    <span style="font-size:12px; background:var(--p-light); color:var(--p); padding:4px 12px; border-radius:20px; font-weight:550;">Darhol javob</span>
+                    <span style="font-size:12px; background:var(--p-light); color:var(--p); padding:4px 12px; border-radius:20px; font-weight:550;">Kursga moslashgan</span>
+                </div>
+            </div>
+            <div class="bento-card" style="background:var(--p); border-color:transparent;">
+                <div class="bento-icon" style="background:rgba(255,255,255,.15);">🎯</div>
+                <h3 style="font-size:18px; font-weight:600; letter-spacing:-.4px; margin-bottom:8px; color:#fff;">
+                    Shaxsiy yo'l</h3>
+                <p style="color:rgba(255,255,255,.7); font-size:14px; line-height:1.7;">AI sizning darajangizni aniqlab,
+                    mos o'quv rejasi tuzadi.</p>
+            </div>
+            <div class="bento-card">
+                <div class="bento-icon" style="background:#ECFDF5;">🏆</div>
+                <h3 style="font-size:18px; font-weight:600; letter-spacing:-.4px; margin-bottom:8px;">Sertifikat</h3>
+                <p style="color:var(--ink3); font-size:14px; line-height:1.7;">Kurs tugagach rasmiy sertifikat.
+                    LinkedIn'ga ulash mumkin.</p>
+            </div>
+            <div class="bento-card">
+                <div class="bento-icon" style="background:#FFF7ED;">🔥</div>
+                <h3 style="font-size:18px; font-weight:600; letter-spacing:-.4px; margin-bottom:8px;">Gamification</h3>
+                <p style="color:var(--ink3); font-size:14px; line-height:1.7;">Streak, XP ball, leaderboard — o'rganish
+                    o'yinga aylanadi.</p>
+            </div>
+            <div class="bento-card">
+                <div class="bento-icon" style="background:#EFF6FF;">📈</div>
+                <h3 style="font-size:18px; font-weight:600; letter-spacing:-.4px; margin-bottom:8px;">Progress</h3>
+                <p style="color:var(--ink3); font-size:14px; line-height:1.7;">Kunlik, haftalik taraqqiyot grafigi.
+                    Qayerda orqada qolganingizni ko'ring.</p>
+            </div>
+            <div class="bento-card">
+                <div class="bento-icon" style="background:#FDF4FF;">🌍</div>
+                <h3 style="font-size:18px; font-weight:600; letter-spacing:-.4px; margin-bottom:8px;">O'zbek tilida</h3>
+                <p style="color:var(--ink3); font-size:14px; line-height:1.7;">Barcha kurslar va AI ustoz o'zbek tilida.
+                    Til to'siq emas.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- KURSLAR -->
+<section id="kurslar" style="padding:80px 0; background:#fff; border-top:1px solid var(--border);">
+    <div class="section-wrap">
+        <div class="section-header">
+            <div class="eyebrow">📚 Kurslar</div>
+            <h2 class="h2">Nimani <em>o'rganmoqchisiz?</em></h2>
+            <p class="sub">Har bir kursda AI ustoz bor — tushunmagan narsangizni darhol so'rang.</p>
+        </div>
+        <div class="course-grid">
+            <div class="course-card">
+                <div class="course-thumb" style="background:linear-gradient(135deg,#ede9fe,#ddd6fe);">🐍</div>
+                <div class="course-body">
+                    <div class="level-badge" style="background:#ede9fe; color:#6d28d9;">◉ Boshlang'ich</div>
+                    <h3 style="font-size:17px; font-weight:600; letter-spacing:-.4px; margin-bottom:6px;">Python
+                        dasturlash</h3>
+                    <p style="font-size:13px; color:var(--ink3); line-height:1.6; margin-bottom:16px;">Noldan Python
+                        o'rganing. O'zgaruvchilar, funksiyalar, OOP va real loyihalar.</p>
+                    <div style="display:flex; align-items:center; justify-content:space-between;">
+                        <span style="font-size:12px; color:var(--ink3);">32 dars · 8 hafta</span>
+                        <a href="{% url 'register' %}"
+                           style="font-size:13px; font-weight:600; color:var(--p); text-decoration:none;">Boshlash →</a>
+                    </div>
+                </div>
+            </div>
+            <div class="course-card" style="border-color:var(--p-mid);">
+                <div style="position:absolute; top:12px; right:12px; background:var(--p); color:#fff; font-size:11px; font-weight:600; padding:4px 10px; border-radius:20px; z-index:2;">
+                    🔥 Mashhur
+                </div>
+                <div class="course-thumb" style="background:linear-gradient(135deg,#f3e8ff,#e9d5ff);">🤖</div>
+                <div class="course-body">
+                    <div class="level-badge" style="background:#f3e8ff; color:#7c3aed;">◉ O'rta</div>
+                    <h3 style="font-size:17px; font-weight:600; letter-spacing:-.4px; margin-bottom:6px;">AI va Machine
+                        Learning</h3>
+                    <p style="font-size:13px; color:var(--ink3); line-height:1.6; margin-bottom:16px;">ML asoslari,
+                        neural network va real loyihalar. Eng ko'p talab qilinadigan ko'nikma.</p>
+                    <div style="display:flex; align-items:center; justify-content:space-between;">
+                        <span style="font-size:12px; color:var(--ink3);">48 dars · 10 hafta</span>
+                        <a href="{% url 'register' %}"
+                           style="font-size:13px; font-weight:600; color:var(--p); text-decoration:none;">Boshlash →</a>
+                    </div>
+                </div>
+            </div>
+            <div class="course-card">
+                <div class="course-thumb" style="background:linear-gradient(135deg,#ecfdf5,#d1fae5);">🌐</div>
+                <div class="course-body">
+                    <div class="level-badge" style="background:#ecfdf5; color:#059669;">◉ Boshlang'ich</div>
+                    <h3 style="font-size:17px; font-weight:600; letter-spacing:-.4px; margin-bottom:6px;">Web
+                        Development</h3>
+                    <p style="font-size:13px; color:var(--ink3); line-height:1.6; margin-bottom:16px;">HTML, CSS,
+                        JavaScript — zamonaviy veb-sayt quring. Portfolio loyihalar bilan.</p>
+                    <div style="display:flex; align-items:center; justify-content:space-between;">
+                        <span style="font-size:12px; color:var(--ink3);">28 dars · 6 hafta</span>
+                        <a href="{% url 'register' %}"
+                           style="font-size:13px; font-weight:600; color:var(--p); text-decoration:none;">Boshlash →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- AI USTOZ DARK SECTION -->
+<section id="ustoz" style="padding:80px 0;">
+    <div class="section-wrap">
+        <div class="chat-section">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; position:relative; z-index:1;">
+                <div>
+                    <div style="display:inline-flex; align-items:center; gap:6px; background:rgba(139,92,246,.25); color:#c4b5fd; border:1px solid rgba(139,92,246,.3); border-radius:30px; padding:5px 14px; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.3px; margin-bottom:20px;">
+                        ✦ AI Ustoz
+                    </div>
+                    <h2 style="font-size:42px; font-weight:300; letter-spacing:-1.5px; color:#fff; line-height:1.1; margin-bottom:20px;">
+                        Savol berishdan <span
+                            style="font-family:'Instrument Serif',serif; font-style:italic; color:#c4b5fd;">uyalmang</span>
+                    </h2>
+                    <p style="font-size:16px; color:rgba(255,255,255,.55); line-height:1.7; margin-bottom:36px; font-weight:300;">
+                        Kechasi 3 da ham, bir savolni 10 marta so'rasangiz ham — AI ustoz charchamaydi. Har bir kurs
+                        mavzusiga maxsus sozlangan.</p>
+                    <div style="display:flex; flex-direction:column; gap:16px;">
+                        <div style="display:flex; gap:14px; align-items:flex-start;">
+                            <div style="width:36px;height:36px;border-radius:10px;background:rgba(139,92,246,.2);border:1px solid rgba(139,92,246,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;">
+                                ⚡
+                            </div>
+                            <div><p style="font-size:14px;font-weight:600;color:#fff;margin-bottom:3px;">2 soniyada
+                                javob</p>
+                                <p style="font-size:13px;color:rgba(255,255,255,.45);">Kutish yo'q. Darhol aniq
+                                    tushuntirma olasiz.</p></div>
+                        </div>
+                        <div style="display:flex; gap:14px; align-items:flex-start;">
+                            <div style="width:36px;height:36px;border-radius:10px;background:rgba(139,92,246,.2);border:1px solid rgba(139,92,246,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;">
+                                🎯
+                            </div>
+                            <div><p style="font-size:14px;font-weight:600;color:#fff;margin-bottom:3px;">Kursga
+                                moslashgan</p>
+                                <p style="font-size:13px;color:rgba(255,255,255,.45);">Python kursi AI ustozi faqat
+                                    Python biladi — chuqur.</p></div>
+                        </div>
+                        <div style="display:flex; gap:14px; align-items:flex-start;">
+                            <div style="width:36px;height:36px;border-radius:10px;background:rgba(139,92,246,.2);border:1px solid rgba(139,92,246,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;">
+                                🌙
+                            </div>
+                            <div><p style="font-size:14px;font-weight:600;color:#fff;margin-bottom:3px;">24/7 mavjud</p>
+                                <p style="font-size:13px;color:rgba(255,255,255,.45);">Dam olish kuni, kech tun — qachon
+                                    xohlasangiz.</p></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-ui">
+                    <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.08);">
+                        <div style="width:34px;height:34px;border-radius:9px;background:var(--p);display:flex;align-items:center;justify-content:center;">
+                            <svg width="16" height="16" fill="none" stroke="white" stroke-width="1.5"
+                                 viewBox="0 0 18 18">
+                                <path d="M9 2L3.5 5.5V12L9 16L14.5 12V5.5L9 2Z" stroke-linejoin="round"/>
+                                <circle cx="9" cy="9" r="2" fill="white" stroke="none"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p style="font-size:13px;font-weight:600;color:#fff;">AI Ustoz · Python</p>
+                            <p style="font-size:11px;color:#4ade80;display:flex;align-items:center;gap:4px;"><span
+                                    style="width:5px;height:5px;background:#4ade80;border-radius:50%;display:inline-block;"></span>Onlayn
+                            </p>
+                        </div>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px;">
+                        <div class="msg msg-user">List comprehension nima?</div>
+                        <div class="msg msg-ai">Ro'yxat yaratishning qisqa usuli:<br/><br/><code
+                                style="font-size:12px;background:rgba(255,255,255,.08);padding:8px 10px;border-radius:8px;display:block;color:#c4b5fd;">[x**2
+                            for x in range(5)]<br/><span style="color:rgba(255,255,255,.4)"># → [0, 1, 4, 9, 16]</span></code>
+                        </div>
+                        <div class="msg msg-user">Filtrlash ham mumkinmi?</div>
+                        <div class="msg msg-ai">Ha! Shart qo'shasiz:<br/><code
+                                style="font-size:12px;background:rgba(255,255,255,.08);padding:8px 10px;border-radius:8px;display:block;color:#c4b5fd;margin-top:6px;">[x
+                            for x in range(10) if x%2==0]</code></div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;">
+                        <input style="flex:1;background:transparent;border:none;outline:none;color:rgba(255,255,255,.4);font-size:14px;font-family:'Geist',sans-serif;"
+                               placeholder="Savol yozing..." readonly/>
+                        <div style="width:30px;height:30px;background:var(--p);border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;">
+                            <svg width="13" height="13" fill="none" stroke="#fff" stroke-width="2.5"
+                                 stroke-linecap="round" viewBox="0 0 14 14">
+                                <path d="M2 12L12 7 2 2v4l7 1-7 1v4z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PRICING -->
+<section id="narx" style="padding:80px 0; background:#fff; border-top:1px solid var(--border);">
+    <div class="section-wrap">
+        <div class="section-header">
+            <div class="eyebrow">💰 Narx</div>
+            <h2 class="h2">Sodda va <em>shaffof</em></h2>
+            <p class="sub">Boshlash bepul. Tayyor bo'lganda obuna olasiz — majburlash yo'q.</p>
+        </div>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <p style="font-size:13px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:20px;">
+                    Bepul</p>
+                <div style="display:flex;align-items:baseline;gap:4px;margin-bottom:6px;"><span class="price-num"
+                                                                                                style="color:var(--ink);">$0</span>
+                </div>
+                <p style="font-size:13px;color:var(--ink3);margin-bottom:28px;">Har doim bepul</p>
+                <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:32px;">
+                    <p class="check">✓ &nbsp;2 ta bepul kurs</p>
+                    <p class="check">✓ &nbsp;AI ustoz — kuniga 10 savol</p>
+                    <p class="check">✓ &nbsp;Progress tracking</p>
+                    <p class="check-x">✗ &nbsp;Sertifikat</p>
+                    <p class="check-x">✗ &nbsp;Cheksiz savollar</p>
+                    <p class="check-x">✗ &nbsp;Barcha kurslar</p>
+                </div>
+                <a href="{% url 'register' %}" class="btn btn-ghost"
+                   style="width:100%;justify-content:center;">Boshlash</a>
+            </div>
+            <div class="pricing-card featured">
+                <div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:#fde68a;color:#92400e;font-size:12px;font-weight:700;padding:5px 16px;border-radius:30px;white-space:nowrap;">
+                    ⚡ Eng mashhur
+                </div>
+                <p style="font-size:13px;font-weight:600;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.5px;margin-bottom:20px;">
+                    Pro</p>
+                <div style="display:flex;align-items:baseline;gap:4px;margin-bottom:6px;"><span class="price-num"
+                                                                                                style="color:#fff;">$9</span><span
+                        style="font-size:14px;color:rgba(255,255,255,.6);">/oy</span></div>
+                <p style="font-size:13px;color:rgba(255,255,255,.6);margin-bottom:28px;">Birinchi oy bepul</p>
+                <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:32px;">
+                    <p style="font-size:14px;color:rgba(255,255,255,.9);">✓ &nbsp;Barcha kurslar</p>
+                    <p style="font-size:14px;color:rgba(255,255,255,.9);">✓ &nbsp;AI ustoz — cheksiz</p>
+                    <p style="font-size:14px;color:rgba(255,255,255,.9);">✓ &nbsp;Sertifikat (LinkedIn)</p>
+                    <p style="font-size:14px;color:rgba(255,255,255,.9);">✓ &nbsp;Yangi kurslar birinchi</p>
+                    <p style="font-size:14px;color:rgba(255,255,255,.9);">✓ &nbsp;Progress analytics</p>
+                </div>
+                <a href="{% url 'register' %}" class="btn btn-white" style="width:100%;justify-content:center;">Boshlash
+                    →</a>
+            </div>
+            <div class="pricing-card">
+                <p style="font-size:13px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:20px;">
+                    Jamoa</p>
+                <div style="display:flex;align-items:baseline;gap:4px;margin-bottom:6px;"><span class="price-num"
+                                                                                                style="color:var(--ink);">$29</span><span
+                        style="font-size:14px;color:var(--ink3);">/oy</span></div>
+                <p style="font-size:13px;color:var(--ink3);margin-bottom:28px;">5 kishi uchun</p>
+                <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:32px;">
+                    <p class="check">✓ &nbsp;Pro imkoniyatlar × 5</p>
+                    <p class="check">✓ &nbsp;Jamoa dashboard</p>
+                    <p class="check">✓ &nbsp;Admin panel</p>
+                    <p class="check">✓ &nbsp;Korporativ sertifikat</p>
+                    <p class="check">✓ &nbsp;Ustuvor qo'llab-quvvatlash</p>
+                </div>
+                <a href="#" class="btn btn-ghost" style="width:100%;justify-content:center;">Bog'lanish</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section style="padding:80px 0; background:var(--surface); border-top:1px solid var(--border);">
+    <div class="section-wrap">
+        <div class="section-header">
+            <div class="eyebrow">💬 Fikrlar</div>
+            <h2 class="h2">O'quvchilar <em>nima deydi</em></h2>
+        </div>
+        <div class="testi-grid">
+            <div class="testi-card">
+                <div style="display:flex;gap:2px;margin-bottom:14px;">★★★★★</div>
+                <p style="font-size:14px;color:var(--ink2);line-height:1.7;margin-bottom:16px;">"AI ustoz tufayli
+                    Python'ni 3 oyda o'rgandim. Har qanday savolga sabr bilan javob beradi — odatiy ustozdan
+                    yaxshiroq!"</p>
+                <div style="display:flex;align-items:center;gap:10px;">
+                    <div style="width:36px;height:36px;border-radius:50%;background:var(--p);display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700;">
+                        A
+                    </div>
+                    <div><p style="font-size:13px;font-weight:600;color:var(--ink);">Aziza T.</p>
+                        <p style="font-size:12px;color:var(--ink3);">Frontend developer</p></div>
+                </div>
+            </div>
+            <div class="testi-card">
+                <div style="display:flex;gap:2px;margin-bottom:14px;">★★★★★</div>
+                <p style="font-size:14px;color:var(--ink2);line-height:1.7;margin-bottom:16px;">"Duolingo'dan
+                    ilhomlangan streak tizimi menga har kuni o'rganishga undaydi. 30 kunlik streak qildim!"</p>
+                <div style="display:flex;align-items:center;gap:10px;">
+                    <div style="width:36px;height:36px;border-radius:50%;background:#059669;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700;">
+                        B
+                    </div>
+                    <div><p style="font-size:13px;font-weight:600;color:var(--ink);">Bobur M.</p>
+                        <p style="font-size:12px;color:var(--ink3);">Talaba, TATU</p></div>
+                </div>
+            </div>
+            <div class="testi-card">
+                <div style="display:flex;gap:2px;margin-bottom:14px;">★★★★★</div>
+                <p style="font-size:14px;color:var(--ink2);line-height:1.7;margin-bottom:16px;">"O'zbek tilida AI
+                    yordamida o'rganish — bu inqilob! Ingliz tili to'siq emas endi."</p>
+                <div style="display:flex;align-items:center;gap:10px;">
+                    <div style="width:36px;height:36px;border-radius:50%;background:#dc2626;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700;">
+                        D
+                    </div>
+                    <div><p style="font-size:13px;font-weight:600;color:var(--ink);">Dilnoza K.</p>
+                        <p style="font-size:12px;color:var(--ink3);">Dizayner</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="signup" style="padding:80px 28px;">
+    <div style="max-width:1100px; margin:0 auto;">
+        <div class="cta-final">
+            <div style="position:relative;z-index:1;">
+                <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.2);border-radius:30px;padding:5px 14px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.3px;margin-bottom:20px;">
+                    🚀 Hozir boshlang
+                </div>
+                <h2 style="font-size:clamp(32px,5vw,56px);font-weight:300;letter-spacing:-2px;color:#fff;line-height:1.1;margin-bottom:16px;">
+                    Birinchi kurs — <span style="font-family:'Instrument Serif',serif;font-style:italic;">bepul</span>
+                </h2>
+                <p style="font-size:17px;color:rgba(255,255,255,.65);margin-bottom:40px;font-weight:300;">Email
+                    qoldiring — biz siz bilan bog'lanamiz.</p>
+                <div class="email-input-wrap">
+                    <input class="email-input" type="email" placeholder="email@manzil.com"/>
+                    <a href="{% url 'register' %}" class="btn btn-white">Ro'yxatdan o'tish →</a>
+                </div>
+                <p style="font-size:13px;color:rgba(255,255,255,.4);margin-top:14px;">Spam yo'q · Istalgan vaqt bekor
+                    qilish mumkin</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-inner">
+        <a class="logo" href="{% url 'landing' %}">
+            <div class="logo-mark">
+                <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
+                    <path d="M9 2L3.5 5.5V12L9 16L14.5 12V5.5L9 2Z" stroke="white" stroke-width="1.5"
+                          stroke-linejoin="round"/>
+                    <circle cx="9" cy="9" r="2" fill="white"/>
+                </svg>
+            </div>
+            <span class="logo-text">LearnAI</span>
+        </a>
+        <p style="font-size:13px;color:var(--ink3);">© 2025 LearnAI. Barcha huquqlar himoyalangan.</p>
+        <div style="display:flex;gap:24px;">
+            <a href="#" style="font-size:13px;color:var(--ink3);text-decoration:none;">Maxfiylik</a>
+            <a href="#" style="font-size:13px;color:var(--ink3);text-decoration:none;">Shartlar</a>
+            <a href="#" style="font-size:13px;color:var(--ink3);text-decoration:none;">Aloqa</a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
