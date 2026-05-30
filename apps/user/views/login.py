@@ -7,14 +7,18 @@ from apps.user.forms import LoginForm, RegisterForm
 
 
 class LoginView(View):
-    template_name = "core/login.html"
+    template_name: str = "core/login.html"
 
     def get(self, request: HttpRequest) -> HttpResponse:
-        return render(request, self.template_name, {
-            "login_form": LoginForm(),
-            "register_form": RegisterForm(),
-            "active_tab": "login",
-        })
+        return render(
+            request,
+            self.template_name,
+            {
+                "login_form": LoginForm(),
+                "register_form": RegisterForm(),
+                "active_tab": "login",
+            },
+        )
 
     def post(self, request: HttpRequest) -> HttpResponse:
         login_form = LoginForm(request.POST)
@@ -24,13 +28,19 @@ class LoginView(View):
                 email=login_form.cleaned_data["email"],
                 password=login_form.cleaned_data["password"],
             )
-            if user:
+
+            if user is not None:
                 login(request, user)
                 return redirect("dashboard")
+
             login_form.add_error(None, "Email or Password is incorrect")
 
-        return render(request, self.template_name, {
-            "login_form": login_form,
-            "register_form": RegisterForm(),
-            "active_tab": "login",
-        })
+        return render(
+            request,
+            self.template_name,
+            {
+                "login_form": login_form,
+                "register_form": RegisterForm(),
+                "active_tab": "login",
+            },
+        )

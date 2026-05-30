@@ -4,5 +4,4 @@ from apps.core.views import LandingView, DashboardView
 urlpatterns = [
     path("", LandingView.as_view(), name="landing"),
     path("dashboard/", DashboardView.as_view(), name="dashboard"),
-
 ]
