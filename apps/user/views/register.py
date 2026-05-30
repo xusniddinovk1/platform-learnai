@@ -52,7 +52,7 @@ class RegisterView(View):
             )
             user = self.service.create_user(dto)
             login(request, user)
-            return redirect("dashboard")
+            return redirect("landing")
 
         return render(
             request,

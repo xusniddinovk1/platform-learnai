@@ -31,7 +31,7 @@ class LoginView(View):
 
             if user is not None:
                 login(request, user)
-                return redirect("dashboard")
+                return redirect("landing")
 
             login_form.add_error(None, "Email or Password is incorrect")
 
