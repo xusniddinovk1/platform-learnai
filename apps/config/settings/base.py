@@ -71,4 +71,5 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
+    "apps.user.backends.EmailBackend",
 ]
